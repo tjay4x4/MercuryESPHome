@@ -11,13 +11,13 @@ class Mercury : public PollingComponent, public UARTDevice {
   Sensor *Tariff3 {nullptr};
   Sensor *Sum_Tariff {nullptr};
 
-  int seriall = 420095;  // сюда свой серийный номер счетчика
+  int seriall = 696456;  // сюда свой серийный номер счетчика
 
   public:
     Mercury(UARTComponent *parent, Sensor *sensor1, Sensor *sensor2, Sensor *sensor3, Sensor *sensor4, Sensor *sensor5, Sensor *sensor6, Sensor *sensor7) : UARTDevice(parent) , Volts(sensor1) , Amps(sensor2) , Watts(sensor3), Tariff1(sensor4), Tariff2(sensor5), Tariff3(sensor6), Sum_Tariff(sensor7) {}
 
-  unsigned char electrical_parameters[7]; // Байты на получене мгновенных значений
-  unsigned char tarif[7]; // Байты на получение тариффа
+  unsigned char electrical_parameters[7] = { 0x00, 0x0A, 0xA0, 0x88, 0x63, 0x01, 0xD3 }; // Байты на получене мгновенных значений
+  unsigned char tarif[7] = { 0x00, 0x0A, 0xA0, 0x88, 0x27, 0x01, 0xE0 }; // Байты на получение тариффа
 
   byte Re_buf[100];
   int counter=0;
